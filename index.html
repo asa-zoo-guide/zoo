@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 30px 20px;
+      text-align: center;
+      background-color: #f9f9f9;
+    }
+    .speech-btn {
+      background-color: #1a73e8; /* Googleブルー */
+      color: white;
+      border: none;
+      padding: 16px 32px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .speech-btn:hover {
+      background-color: #1557b0;
+    }
+    #text-to-read {
+      font-size: 20px;
+      line-height: 1.6;
+      margin-bottom: 40px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+
+  <p id="text-to-read">ここに読み上げたい文章を入力してください。ボタンを押すと、このテキストが音声で流れます。GitHub Pagesなら、スマホの通常モードでも100%音が鳴るはずです！</p>
+
+  <button class="speech-btn" onclick="speakText()">
+    🔊 音声で聴く
+  </button>
+
+  <script>
+    function speakText() {
+      const text = document.getElementById("text-to-read").innerText;
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "ja-JP";
+      utterance.rate = 1.0;
+      
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(utterance);
+    }
+  </script>
+
+</body>
+</html>
