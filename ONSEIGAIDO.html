@@ -8,7 +8,9 @@
 <title>asazoo fan</title>
 
 <style>
-body {
+<!--
+
+body{
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   margin: 0;
   text-align: center;
@@ -16,23 +18,23 @@ body {
   background: #ffffff;
 }
 
-.container {
+.container{
   max-width: 600px;
   margin: 60px auto;
   padding: 20px;
 }
 
-h1 {
+h1{
   font-size: 28px;
   margin-bottom: 20px;
 }
 
-p {
+p{
   color: #444;
   margin-bottom: 30px;
 }
 
-button {
+button{
   font-size: 16px;
   padding: 12px;
   border: none;
@@ -45,7 +47,7 @@ button {
   margin: 0 auto 40px;
 }
 
-.links a {
+.links a{
   display: block;
   padding: 14px;
   margin: 10px 0;
@@ -56,32 +58,26 @@ button {
   background: #fafafa;
 }
 
-.links a:hover {
+.links a:hover{
   background: #f0f0f0;
 }
+-->
 </style>
 </head>
 
 <body>
-
-<div class="container">
-
-<h1>asazoo fan</h1>
-
-<p id="text">安佐動物公園を楽しむためのファンサイトです </p>
-
-<button onclick="readText()">▶ 読み上げ</button>
-
-<div class="links">
-  <a href="#">音声ガイド</a>
-  <a href="#">歩行ラリー</a>
-  <a href="#">ASA ZOOの冒険</a>
+<div class="container" style="text-align : center;">
+<h1>音声ガイド</h1>
+<p id="text"><span style="font-size : 80%;">聞きたい動物のボタンを押してください</span>
+  </p>
+  <div class="links">
+  <a href="#">ポニー</a>
+  <a href="#">ベニイロフラミンゴ</a>
+  <a href="#">レッサーパンダ</a>
   <a href="#">動物園を作ろう</a>
 </div>
-
-</div>
-
-<script>
+  <div class="container" style="text-align : left;"></div>
+  <script>
 function readText() {
   const text = document.getElementById("text").innerText;
   const uttr = new SpeechSynthesisUtterance(text);
@@ -90,5 +86,6 @@ function readText() {
 }
 </script>
 
+</div>
 </body>
 </html>
