@@ -16,30 +16,32 @@
 <h1>ポニー</h1>
    <div class="card">
         <p>ポニーは大人になっても小柄な、優しくて力持ちなウマの仲間です。</p>
-        <button class="play-btn" onclick="playText('pony')">解説を読み上げる（通信量ほぼゼロ）</button><BR>
-        <div id="pony" style="display:none;">
-            ここはぴーちくパークです。目の前にいるのはポニー。よく赤ちゃんのウマと間違えられますが、実はこれで大人なんです。肩までの高さが148センチ以下のウマをまとめてポニーと呼びます。とっても温厚で力持ちなポニーたちの、優しい目を見つめてみてくださいね。
-        </div>
-　　　　<a href="https://stand.fm/episodes/69f5978d14f885e014d8c834">音声解説を聴く（少し通信量がかかる）</a>
+        
+        <button type="button" class="play-btn" onclick="playText('pony')">解説を読み上げる（通信量ほぼゼロ）</button>
+        
+        <div id="pony" style="display:none;">ここはぴーちくパークです。目の前にいるのはポニー。よく赤ちゃんのウマと間違えられますが、実はこれで大人なんです。肩までの高さが148センチ以下のウマをまとめてポニーと呼びます。とっても温厚で力持ちなポニーたちの、優しい目を見つめてみてくださいね。</div>
+        
+        <br>
+        <a href="https://stand.fm/episodes/69f5978d14f885e014d8c834">音声解説を聴く（少し通信量がかかる）</a>
    </div>
 
 <script>
-// スマホ（iPhone/Android）で確実に音声を鳴らすためのプログラム
 function playText(id) {
-  // すでに声が流れている場合は一度止める（連打対策）
-  if (speechSynthesis.speaking) {
-    speechSynthesis.cancel();
-  }
-
-  const targetElement = document.getElementById(id);
-  if (targetElement) {
-    const text = targetElement.innerText;
-    const uttr = new SpeechSynthesisUtterance(text);
-    uttr.lang = "ja-JP"; // 日本語音声に設定
-    uttr.rate = 1.0;     // 読み上げスピード
-    uttr.pitch = 1.0;    // 声の高さ
+  // 動いている音声をすべてクリアにする
+  if (window.speechSynthesis) {
+    window.speechSynthesis.cancel();
     
-    speechSynthesis.speak(uttr);
+    var target = document.getElementById(id);
+    if (target) {
+      var text = target.textContent || target.innerText;
+      var uttr = new SpeechSynthesisUtterance(text);
+      uttr.lang = "ja-JP";
+      uttr.rate = 1.0;
+      uttr.pitch = 1.0;
+      
+      // 再生を実行
+      window.speechSynthesis.speak(uttr);
+    }
   }
 }
 </script>
