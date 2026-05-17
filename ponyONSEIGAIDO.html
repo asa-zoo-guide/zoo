@@ -11,7 +11,15 @@
 <body>
 <div class="container" style="text-align : center;">
 <h1>ポニー</h1>
-<button onclick="speechSynthesis.speak(new SpeechSynthesisUtterance('こんにちは'))">聞く</button>
+
+<button id="btn">読む</button>
+
+<script>
+document.getElementById("btn").onclick = function() {
+  const u = new SpeechSynthesisUtterance("こんにちは");
+  u.lang = "ja-JP";
+  speechSynthesis.speak(u);
+};
 </div>
 </body>
 </html>
