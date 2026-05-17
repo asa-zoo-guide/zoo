@@ -2,33 +2,21 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="GENERATOR" content="JustSystems Homepage Builder Version 22.0.5.0 for Windows">
 <meta name="justsystems:DeviceType" content="SmartPhoneV">
-<title>asazoo fan</title>
+<title></title>
 </head>
-
 <body>
-<div class="container" style="text-align : center;">
-<h1>ポニー３</h1>
+
 <button id="btn">読む</button>
 
 <script>
-document.getElementById("btn").onclick = function() {
-  speechSynthesis.cancel(); // 念のためリセット
-
+document.getElementById("btn").onclick = () => {
   const u = new SpeechSynthesisUtterance("こんにちは");
   u.lang = "ja-JP";
-
-  speechSynthesis.onvoiceschanged = () => {
-    const voices = speechSynthesis.getVoices();
-    const jaVoice = voices.find(v => v.lang === "ja-JP");
-    if (jaVoice) u.voice = jaVoice;
-    speechSynthesis.speak(u);
-  };
-
   speechSynthesis.speak(u);
 };
-</script></div>
+</script>
+
 </body>
 </html>
