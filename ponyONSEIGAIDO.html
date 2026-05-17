@@ -2,73 +2,21 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <meta name="GENERATOR" content="JustSystems Homepage Builder Version 22.0.5.0 for Windows">
 <meta name="justsystems:DeviceType" content="SmartPhoneV">
-<title>asazoo fan</title>
-
-<style>
-<!--
-
-body{
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  margin: 0;
-  text-align: center;
-  line-height: 1.8;
-  background: #ffffff;
-}
-
-.container{
-  max-width: 600px;
-  margin: 60px auto;
-  padding: 20px;
-}
-
-h1{
-  font-size: 28px;
-  margin-bottom: 20px;
-}
-
-p{
-  color: #444;
-  margin-bottom: 30px;
-}
-
-button{
-  font-size: 16px;
-  padding: 12px;
-  border: none;
-  border-radius: 10px;
-  background-color: #4CAF50;
-  color: white;
-  width: 100%;
-  max-width: 300px;
-  display: block;
-  margin: 0 auto 40px;
-}
-
-.links a{
-  display: block;
-  padding: 14px;
-  margin: 10px 0;
-  text-decoration: none;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  color: #333;
-  background: #fafafa;
-}
-
-.links a:hover{
-  background: #f0f0f0;
-}
--->
+<title>安佐動物公園 スマホガイド</title>
+    <style>
 </style>
 </head>
-
 <body>
-<div class="container" style="text-align : center;">
-<h1>ポニー</h1>
-   <div class="card">
+
+    <header>
+        <h1>安佐動物公園 音声ガイド</h1>
+    </header>
+
+    <div class="card">
+        <h2>ポニー</h2>
         <p>ポニーは大人になっても小柄な、優しくて力持ちなウマの仲間です。</p>
         <button class="play-btn" onclick="playText('pony')">解説を読み上げる（通信量ほぼゼロ）</button><BR>
         <div id="pony" style="display:none;">
@@ -78,15 +26,46 @@ button{
 
     </div>
 
-  <script>
-function readText() {
-  const text = document.getElementById("text").innerText;
-  const uttr = new SpeechSynthesisUtterance(text);
-  uttr.lang = "ja-JP";
-  speechSynthesis.speak(uttr);
+    <div class="card">
+        <h2>マルミミゾウ</h2>
+        <p>日本でも珍しいゾウ、メイちゃんがいます。耳が丸いのが特徴です。今は静かに見守りましょう。</p>
+        <button class="play-btn btn-elephant" onclick="playText('elephant')">ゾウの解説を聴く</button>
+        <div id="elephant" style="display:none;">
+            ここにいるのはマルミミゾウのメイです。アフリカゾウよりも少し体が小さくて、名前の通り耳が丸いのが特徴です。実は今、メイのお腹の中には赤ちゃんがいます。安佐動物公園で新しい命が誕生するのを、みんなで静かに、温かく見守ってあげましょう。
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>シフゾウ</h2>
+        <p>四つの動物に似ているけれど、そのどれでもない。かつて野生では姿を消した貴重な動物です。</p>
+        <button class="play-btn btn-deer" onclick="playText('deer')">シフゾウの解説を聴く</button>
+        <div id="deer" style="display:none;">
+            不思議な名前の動物、シフゾウの前に到着しました。漢字で四つの像が似ていないと書きます。ツノはシカ、顔はウマ、体はロバ、ひづめはウシ。でもそのどれでもない、そんな不思議な姿をじっくり観察してみてください。実は野生では一度絶滅してしまった、とても貴重な動物なんですよ。
+        </div>
+    </div>
+
+    <footer>
+        &copy; ASA Zoo Fan Guide
+    </footer>
+
+<script>
+// 正しい読み上げプログラム（連打対策・スマホ安定化付き）
+function playText(id) {
+  if (speechSynthesis.speaking) {
+    speechSynthesis.cancel();
+  }
+
+  const targetElement = document.getElementById(id);
+  if (targetElement) {
+    const text = targetElement.innerText;
+    const uttr = new SpeechSynthesisUtterance(text);
+    uttr.lang = "ja-JP";
+    uttr.rate = 1.0;
+    uttr.pitch = 1.0;
+    speechSynthesis.speak(uttr);
+  }
 }
 </script>
 
-</div>
 </body>
 </html>
