@@ -6,46 +6,12 @@
 <meta name="GENERATOR" content="JustSystems Homepage Builder Version 22.0.5.0 for Windows">
 <meta name="justsystems:DeviceType" content="SmartPhoneV">
 <title>asazoo fan</title>
-
-<style>
-</style>
 </head>
 
 <body>
 <div class="container" style="text-align : center;">
 <h1>ポニー</h1>
-   <div class="card">
-        <p>ポニーは大人になっても小柄な、優しくて力持ちなウマの仲間です。</p>
-        
-        <button type="button" class="play-btn" onclick="playText('pony')">解説を読み上げる（通信量ほぼゼロ）</button>
-        
-        <div id="pony" style="display:none;">ここはぴーちくパークです。目の前にいるのはポニー。よく赤ちゃんのウマと間違えられますが、実はこれで大人なんです。肩までの高さが148センチ以下のウマをまとめてポニーと呼びます。とっても温厚で力持ちなポニーたちの、優しい目を見つめてみてくださいね。</div>
-        
-        <br>
-        <a href="https://stand.fm/episodes/69f5978d14f885e014d8c834">音声解説を聴く（少し通信量がかかる）</a>
-   </div>
-
-<script>
-function playText(id) {
-  // 動いている音声をすべてクリアにする
-  if (window.speechSynthesis) {
-    window.speechSynthesis.cancel();
-    
-    var target = document.getElementById(id);
-    if (target) {
-      var text = target.textContent || target.innerText;
-      var uttr = new SpeechSynthesisUtterance(text);
-      uttr.lang = "ja-JP";
-      uttr.rate = 1.0;
-      uttr.pitch = 1.0;
-      
-      // 再生を実行
-      window.speechSynthesis.speak(uttr);
-    }
-  }
-}
-</script>
-
+<button onclick="speechSynthesis.speak(new SpeechSynthesisUtterance('こんにちは'))">聞く</button>
 </div>
 </body>
 </html>
