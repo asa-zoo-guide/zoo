@@ -10,16 +10,25 @@
 
 <body>
 <div class="container" style="text-align : center;">
-<h1>ポニー２</h1>
-
+<h1>ポニー３</h1>
 <button id="btn">読む</button>
 
 <script>
 document.getElementById("btn").onclick = function() {
+  speechSynthesis.cancel(); // 念のためリセット
+
   const u = new SpeechSynthesisUtterance("こんにちは");
   u.lang = "ja-JP";
+
+  speechSynthesis.onvoiceschanged = () => {
+    const voices = speechSynthesis.getVoices();
+    const jaVoice = voices.find(v => v.lang === "ja-JP");
+    if (jaVoice) u.voice = jaVoice;
+    speechSynthesis.speak(u);
+  };
+
   speechSynthesis.speak(u);
 };
-</div>
+</script></div>
 </body>
 </html>
