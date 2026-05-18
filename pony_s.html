@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="GENERATOR" content="JustSystems Homepage Builder Version 22.0.5.0 for Windows">
+<meta name="justsystems:DeviceType" content="SmartPhoneV">
+<title>asazoo fan</title>
+
+<style>
+<!--
+
+body{
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  text-align: center;
+  line-height: 1.8;
+  background: #ffffff;
+}
+
+.container{
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 20px;
+}
+
+h1{
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+p{
+  color: #444;
+  margin-bottom: 30px;
+}
+
+button{
+  font-size: 16px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background-color: #4CAF50;
+  color: white;
+  width: 100%;
+  max-width: 300px;
+  display: block;
+  margin: 0 auto 40px;
+}
+
+.links a{
+  display: block;
+  padding: 14px;
+  margin: 10px 0;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  color: #333;
+  background: #fafafa;
+}
+
+.links a:hover{
+  background: #f0f0f0;
+}
+-->
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>asazoo fan</h1>
+
+<p id="text"><span style="font-size : 80%;">安佐動物公園を楽しむためのファンサイトです </span></p>
+
+<div class="links">
+  <a href="ONSEIGAIDO.html">音声ガイド</a>
+  <a href="#">歩行ラリー</a>
+  <a href="#">ASA ZOOの冒険</a>
+  <a href="#">動物園を作ろう</a>
+</div>
+</div>
+ <div class="container" style="text-align : left;">●音声ガイド<BR>
+  　<span style="font-size : 80%;">動物のガイドが音声で聞けます。 </span><br>
+  <br>
+ 
+●歩行ラリー <br>
+  　<span style="font-size : 80%;">自動車競技のラリーのように、地図ではなく、コマ図といわれる指示図をみて、ゴールを目指します。チェック・ポイントのクイズに答えて、デジタル・バッジをもらおう！</span>
+    <br>
+  <br>
+●アサズーの冒険 <br>
+  　<span style="font-size : 80%;">安佐動物公園にいる動物たちの仲間が絶滅の危機に！ 動物からヒントをもらって、ラスボスに挑もう！</span> <br>
+  <br>
+●動物園を作ろう <br>
+  　<span style="font-size : 80%;">あなたは新しい園長です。動物園づくりに挑戦しましょう！ </span></div>
+
+<script>
+function readText() {
+  const text = document.getElementById("text").innerText;
+  const uttr = new SpeechSynthesisUtterance(text);
+  uttr.lang = "ja-JP";
+  speechSynthesis.speak(uttr);
+}
+</script>
+
+</body>
+</html>
