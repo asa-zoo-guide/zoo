@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="GENERATOR" content="JustSystems Homepage Builder Version 22.0.5.0 for Windows">
+<meta name="justsystems:DeviceType" content="SmartPhoneV">
+<title>asazoo fan</title>
+
+<style>
+<!--
+
+body{
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  text-align: center;
+  line-height: 1.8;
+  background: #ffffff;
+}
+
+.container{
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 20px;
+}
+
+h1{
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+p{
+  color: #444;
+  margin-bottom: 30px;
+}
+
+button{
+  font-size: 16px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background-color: #4CAF50;
+  color: white;
+  width: 100%;
+  max-width: 300px;
+  display: block;
+  margin: 0 auto 40px;
+}
+
+.links a{
+  display: block;
+  padding: 14px;
+  margin: 10px 0;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  color: #333;
+  background: #fafafa;
+}
+
+.links a:hover{
+  background: #f0f0f0;
+}
+-->
+</style>
+</head>
+
+<body>
+<div class="container" style="text-align : center;">
+<h1>ASA ZOO の冒険</h1>
+  <p id="text" style="text-align : left;">　<span style="font-size : 80%;">様々なシナリオを用意しています。やってみたい冒険のボタンを押してください。<br>
+  </span></p>
+  <div class="links">
+  <a href="adventure1.html">冒険編</a>
+  <a href="ad_nazo.html">謎解き編</a>
+  <a href="#">癒し編</a>
+  <a href="#">サポート編</a>
+</div>
+  <br>
+  <p style="text-align : left;"><span style="font-size : 80%;">【冒険編】　アサゾー・クエスト<br>
+  　キッズ・ファミリー向け。コマ図を「冒険の地図」に見立て、各ポイントで魔王（絶滅の危機）を倒すための知識を集める。<br>
+  <br>
+  【謎解き編】　消えた飼育員の日記<br>
+  　若者・ゲーム好き向け。ストーリー性を重視した脱出ゲーム形式。音声ガイドに隠されたキーワードを繋げて、最後の「答え」を導き出す。<br>
+  <br>
+  【癒やし編】　森の散歩道<br>
+  </span><span style="font-size : 80%;">　高齢者・ゆっくり派向け。距離や高低差を考慮したルート。動植物の解説を聴きながら、心身ともに健康に。<br>
+  <br>
+  【サポート編】　ベビーカー・ナビ<br>
+  　乳幼児連れ向け。坂道を避け、走り回れる広場やお弁当ポイントを重視。快適さを追求した「おもてなし」ルート。<br>
+  <br>
+  ※どれも生物多様性について学べる冒険です！</span><br>
+  <br>
+  </p>
+  <div class="links">
+  <a href="index.html">トップページに戻る</a>
+</div>
+
+  <div class="container" style="text-align : left;"></div>
+  <script>
+function readText() {
+  const text = document.getElementById("text").innerText;
+  const uttr = new SpeechSynthesisUtterance(text);
+  uttr.lang = "ja-JP";
+  speechSynthesis.speak(uttr);
+}
+</script>
+
+</div>
+</body>
+</html>
