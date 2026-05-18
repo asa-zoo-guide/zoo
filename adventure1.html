@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="GENERATOR" content="JustSystems Homepage Builder Version 22.0.5.0 for Windows">
+    <title>安佐ズー・アドベンチャー：試作版</title>
+    <style>
+        body {
+            margin: 0; padding: 0;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
+            background-color: #e8f5e9; color: #333;
+        }
+        header {
+            background-color: #2e7d32; color: white;
+            text-align: center; padding: 20px 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .container { padding: 20px; max-width: 500px; margin: auto; }
+        .card {
+            background: white; border-radius: 15px;
+            padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px; border-top: 5px solid #ffa000;
+        }
+        h2 { color: #2e7d32; font-size: 1.2rem; margin-top: 0; }
+        p { line-height: 1.6; font-size: 1rem; }
+        
+        /* 入力エリア */
+        .mission-box {
+            background: #fff3e0; padding: 15px;
+            border-radius: 10px; border: 2px dashed #ffa000;
+        }
+        input[type="text"] {
+            width: 100%; padding: 12px; box-sizing: border-box;
+            border: 2px solid #ccc; border-radius: 8px;
+            font-size: 1.1rem; margin-top: 10px;
+        }
+        .check-btn {
+            background-color: #ffa000; color: white;
+            border: none; width: 100%; padding: 15px;
+            border-radius: 8px; font-weight: bold; font-size: 1rem;
+            margin-top: 15px; cursor: pointer;
+            box-shadow: 0 3px 0 #e68a00;
+        }
+        .check-btn:active { transform: translateY(2px); box-shadow: none; }
+
+        /* 正解後の表示 */
+        #success-area { display: none; margin-top: 20px; text-align: center; }
+        .audio-btn {
+            background-color: #8b4513; color: white;
+            padding: 15px; border-radius: 50px; text-decoration: none;
+            display: inline-block; width: 80%; font-weight: bold;
+            margin-top: 10px; box-shadow: 0 4px 0 #5d2e0d;
+        }
+        .next-hint {
+            background: #e1f5fe; border-left: 5px solid #03a9f4;
+            padding: 15px; text-align: left; margin-top: 20px; font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div style="font-size: 0.8rem; font-weight: bold;">安佐ズー探検隊・緊急指令</div>
+    <h1 style="font-size: 1.4rem; margin: 5px 0;">黄金の羽根を探せ！</h1>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>【第1の試練】フラミンゴの魔法</h2>
+        <p>探検隊の諸君、まずはフラミンゴの池の前にある「解説看板」をよく読むのだ。</p>
+        <p><strong>彼らの羽が赤いのは、食べ物に秘密があるらしい。その食べ物の正体とは何だ？</strong></p>
+        
+        <div class="mission-box">
+            <label for="answer">答え（カタカナ6文字）：</label>
+            <input type="text" id="answer" placeholder="答えを入力...">
+            <button class="check-btn" onclick="checkAnswer()">答え合わせをする</button>
+        </div>
+
+        <div id="success-area">
+            <p style="color: #d32f2f; font-weight: bold; font-size: 1.2rem;">★ 正解！レベルが上がった！</p>
+            <p style="font-size: 0.9rem;">ご褒美に、フラミンゴの秘密をこっそり教えよう。<br>（※音が出るので、スマホを耳に当てて聴いてね）</p>
+            
+            <a href="https://stand.fm/episodes/69f7078155a751afc01fe300" target="_blank" class="audio-btn">
+                👂 秘密の通信を聴く
+            </a>
+
+            <div class="next-hint">
+                <strong>次の目的地へのヒント：</strong><br>
+                「ここからは上り坂だ！道なりに進むと左手に大きな『クヌギの木』があるぞ。そこを通り過ぎたら、野外ステージの横にある『自販機』を目指せ。そこに第2の試練が隠されている！」
+            </div>
+        </div>
+    </div>
+
+    <p style="text-align: center; color: #666; font-size: 0.8rem;">
+        &copy; ASA Zoo Volunteers / Story by Tomita
+    </p>
+
+</div>
+
+<script>
+    function checkAnswer() {
+        const val = document.getElementById("answer").value;
+        // 「エビ」や「藻」など看板の内容に合わせて調整可能。今回は例として「プランクトン」
+        if (val === "プランクトン") {
+            document.getElementById("success-area").style.display = "block";
+            // 入力エリアを隠す、または無効化
+            document.querySelector(".mission-box").style.opacity = "0.5";
+            document.querySelector(".check-btn").disabled = true;
+            window.scrollTo(0, document.body.scrollHeight);
+        } else {
+            alert("残念！看板をもう一度よく読んでみてごらん。");
+        }
+    }
+</script>
+
+</body>
+</html>

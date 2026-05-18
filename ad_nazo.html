@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="GENERATOR" content="JustSystems Homepage Builder Version 22.0.5.0 for Windows">
+    <title>安佐ズー・アドベンチャー：謎解き編</title>
+    <style>
+        body {
+            margin: 0; padding: 0;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
+            background-color: #e8f5e9; color: #333;
+        }
+        header {
+            background-color: #2e7d32; color: white;
+            text-align: center; padding: 20px 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .container { padding: 20px; max-width: 500px; margin: auto; }
+        .card {
+            background: white; border-radius: 15px;
+            padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px; border-top: 5px solid #ffa000;
+        }
+        h2 { color: #2e7d32; font-size: 1.2rem; margin-top: 0; }
+        p { line-height: 1.6; font-size: 1rem; }
+        
+        /* 入力エリア */
+        .mission-box {
+            background: #fff3e0; padding: 15px;
+            border-radius: 10px; border: 2px dashed #ffa000;
+        }
+        input[type="text"] {
+            width: 100%; padding: 12px; box-sizing: border-box;
+            border: 2px solid #ccc; border-radius: 8px;
+            font-size: 1.1rem; margin-top: 10px;
+        }
+        .check-btn {
+            background-color: #ffa000; color: white;
+            border: none; width: 100%; padding: 15px;
+            border-radius: 8px; font-weight: bold; font-size: 1rem;
+            margin-top: 15px; cursor: pointer;
+            box-shadow: 0 3px 0 #e68a00;
+        }
+        .check-btn:active { transform: translateY(2px); box-shadow: none; }
+
+        /* 正解後の表示 */
+        #success-area { display: none; margin-top: 20px; text-align: center; }
+        .audio-btn {
+            background-color: #8b4513; color: white;
+            padding: 15px; border-radius: 50px; text-decoration: none;
+            display: inline-block; width: 80%; font-weight: bold;
+            margin-top: 10px; box-shadow: 0 4px 0 #5d2e0d;
+        }
+        .next-hint {
+            background: #e1f5fe; border-left: 5px solid #03a9f4;
+            padding: 15px; text-align: left; margin-top: 20px; font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div style="font-size: 0.8rem; font-weight: bold;">安佐ズー・アドベンチャー　謎解き編</div>
+    <h1 style="font-size: 1.4rem; margin: 5px 0;">消えた飼育員の日記</h1>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>【第1問】飼育員の残した最初のメモ</h2>
+        <p>【状況】
+飼育員が最後に立ち寄ったのは、動物園の入り口近くにある「レッサーパンダ舎」でした。そこには、日記の最初の1ページが破れて残されています。</p>
+        <p><strong>「……今日のレッサーパンダのおやつは、大好物の　リ　　」 </strong></p>
+<p>そこまでしかありません。「リ」から始まるレッサーパンダの大好物とは？</p>
+        
+        <div class="mission-box">
+            <label for="answer">答え（カタカナ３文字）：</label>
+            <input type="text" id="answer" placeholder="答えを入力...">
+            <button class="check-btn" onclick="checkAnswer()">答え合わせをする</button>
+        </div>
+
+        <div id="success-area">
+            <p style="color: #d32f2f; font-weight: bold; font-size: 1.2rem;">★ 正解！レベルが上がった！</p>
+            <p style="font-size: 0.9rem;">ご褒美に、レッサーパンダの秘密をこっそり教えよう。<br></p>
+            
+            <a href="https://stand.fm/episodes/69fc4f03dabc5bf137f4b408" target="_blank" class="audio-btn">
+                👂 秘密の通信を聴く（工事中）
+            </a>
+
+            <div class="next-hint">
+                <strong>次の目的地へのヒント：</strong><br>
+                「ここからは上り坂だ！道なりに進むと左手に大きな『クヌギの木』があるぞ。そこを通り過ぎたら、野外ステージの横にある『自販機』を目指せ。そこに第2の試練が隠されている！」
+            </div>
+        </div>
+    </div>
+
+    <p style="text-align: center; color: #666; font-size: 0.8rem;">
+        &copy; ASA Zoo Volunteers / Story by Tomita
+    </p>
+
+</div>
+
+<script>
+    function checkAnswer() {
+        // 入力された値を「ひらがな」に変換して、前後の空白を消す
+        let val = document.getElementById("answer").value.trim();
+        
+        // カタカナをひらがなに変換（簡易版）
+        val = val.replace(/[ァ-ン]/g, function(s) {
+            return String.fromCharCode(s.charCodeAt(0) - 0x60);
+        });
+
+        // 「りんご」であれば正解（これでカタカナのリンゴも、ひらがなのりんごもOK）
+        if (val === "りんご") {
+            document.getElementById("success-area").style.display = "block";
+            document.querySelector(".mission-box").style.opacity = "0.5";
+            document.querySelector(".check-btn").disabled = true;
+            // エラーメッセージが出ていたら消す
+            const errorMsg = document.getElementById("error-msg");
+            if (errorMsg) errorMsg.style.display = "none";
+            
+            window.scrollTo(0, document.body.scrollHeight);
+        } else {
+            // アラートの代わりに、画面にメッセージを出す
+            let errorMsg = document.getElementById("error-msg");
+            if (!errorMsg) {
+                errorMsg = document.createElement("p");
+                errorMsg.id = "error-msg";
+                errorMsg.style.color = "red";
+                errorMsg.style.fontWeight = "bold";
+                errorMsg.style.marginTop = "10px";
+                document.querySelector(".mission-box").appendChild(errorMsg);
+            }
+            errorMsg.textContent = "残念！「リ」から始まる3文字の食べ物だよ。もう一度考えてみて！";
+            errorMsg.style.display = "block";
+        }
+    }
+</script>
+
+</body>
+</html>
