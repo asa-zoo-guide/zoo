@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="GENERATOR" content="JustSystems Homepage Builder Version 22.0.5.0 for Windows">
+<meta name="justsystems:DeviceType" content="SmartPhoneV">
+<title>シフゾウの解説 - 安佐動物公園ガイド</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #f9f9f9; text-align: center; line-height: 1.8;">
+
+<div style="padding: 20px;">
+  <h1 style="font-size: 24px; color: #2d5a27; margin: 10px 0 20px;">シフゾウ</h1>
+  <br>
+  <div style="padding: 0 5px; margin-bottom: 25px;">
+    <button type="button" id="main-btn" onclick="playText('pony-speech')" 
+            style="display: block; width: 100%; height: 50px; font-size: 24px; font-weight: bold; border: none; border-radius: 16px; background-color: #4CAF50; color: white; cursor: pointer; box-shadow: 0 6px 0 #388E3C; -webkit-tap-highlight-color: transparent;">
+      🔊 お話をきく
+    </button>
+    ↑<br>
+    下の文章を読み上げます
+  </div>
+  <div id="pony-speech" style="font-size: 16px; color: #333333; text-align: left; background: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 20px;">
+    <p data-path-to-node="0">安佐動物公園にいる、まるで魔法の世界から飛び出してきたような不思議な動物、「シフゾウ」のひみつをしょうかいするよ！</p>
+    <hr data-path-to-node="1">
+    <p data-path-to-node="6">『シフゾウ』という名前には、『４つの動物に似ているけれど、そのどれでもない』という意味があるんだ。</p>
+    <p data-path-to-node="7">さあ、ぼくの体をよーく見て、４つの動物を探してみてね。</p>
+    <p data-path-to-node="8">まず、頭の立派なツノは『シカ』に似ている。
+でも、体はシカじゃない。
+お顔を正面から見ると『ウマ』に似ている。
+でも、ウマじゃない。
+足のひづめは『ウシ』に似ているけれどウシじゃないし、長〜いしっぽは『ロバ』に似ているけれどロバじゃない。</p>
+    <p data-path-to-node="9">神様がいろんな動物のカッコいいところを集めて作ったら、こんな不思議な姿になっちゃったんだって。面白いでしょう？</p>
+    <p data-path-to-node="10">ぼくたちは、お水の中に入るのがだ〜い好き！ 昔は、泥やお水がある湿地（しっち）に住んでいたから、泳いだり水草を食べたりするのがとっても得意なんだ。</p>
+    <p data-path-to-node="11">実はね、ぼくたちは昔、野生の世界では一度完全にいなくなってしまった、ものすごく珍しい生き物なんだ。世界中の動物園が力を合わせて大切に守ってきたから、こうして今、みんなに会うことができているんだよ。</p>
+    <p data-path-to-node="12">ぼくのウマに似たお顔や、長いしっぽ、ぜひ近くで観察してみてね！」</p>
+  </div>
+</div>
+<BR>
+<div style="text-align: center; padding: 10px 0 40px;">
+  <a href="ONSEIGAIDO.html" style="color: #888; text-decoration: none; font-size: 14px;">← 音声ガイド（動物一覧）にもどる</a>
+</div>
+<script>
+function playText(id) {
+  var btn = document.getElementById('main-btn');
+  
+  // スマホの音声機能を完全に初期化・クリアする（詰まり解消）
+  if (window.speechSynthesis) {
+    // 1. もし現在喋っている最中なら、止めて緑ボタンに戻す
+    if (window.speechSynthesis.speaking) {
+      window.speechSynthesis.cancel();
+      resetButton(btn);
+      return;
+    }
+    // 過去の変なエラー残骸を念のため一度クリア
+    window.speechSynthesis.cancel();
+  }
+  
+  var target = document.getElementById(id);
+  if (target) {
+    var text = target.textContent || target.innerText;
+    // スピーカーや停止の絵文字をカット
+    var cleanedText = text.replace(/🔊|🛑/g, ''); 
+    
+    // 音声オブジェクトの作成
+    var uttr = new SpeechSynthesisUtterance(cleanedText);
+    uttr.lang = "ja-JP";
+    uttr.rate = 1.0;
+    uttr.pitch = 1.0;
+    
+    // 【最重要】スマホが「タップされた！」と認識した直後に即座に文字を変えて喋らせる
+    btn.innerHTML = '🛑 お話を止める';
+    btn.style.backgroundColor = '#d32f2f';
+    btn.style.boxShadow = '0 6px 0 #9a0007';
+    
+    // 喋り終わったとき・エラーが起きたときは緑に戻す
+    uttr.onend = function() { resetButton(btn); };
+    uttr.onerror = function() { resetButton(btn); };
+    
+    // 発声
+    if (window.speechSynthesis) {
+      window.speechSynthesis.speak(uttr);
+    }
+  }
+}
+
+function resetButton(btn) {
+  if (btn) {
+    btn.innerHTML = '🔊 お話をきく';
+    btn.style.backgroundColor = '#4CAF50';
+    btn.style.boxShadow = '0 6px 0 #388E3C';
+  }
+}
+</script>
+</body>
+</html>

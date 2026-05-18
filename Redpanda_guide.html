@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="GENERATOR" content="JustSystems Homepage Builder Version 22.0.5.0 for Windows">
+<meta name="justsystems:DeviceType" content="SmartPhoneV">
+<title>レッサーパンダーの解説 - 安佐動物公園ガイド</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #f9f9f9; text-align: center; line-height: 1.8;">
+
+<div style="padding: 20px;">
+  <h1 style="font-size: 24px; color: #2d5a27; margin: 10px 0 20px;">レッサーパンダ</h1>
+  <img src="panda.jpg" width="300" border="0" height="224"><br>
+  <div style="padding: 0 5px; margin-bottom: 25px;">
+    <button type="button" id="main-btn" onclick="playText('pony-speech')" 
+            style="display: block; width: 100%; height: 50px; font-size: 24px; font-weight: bold; border: none; border-radius: 16px; background-color: #4CAF50; color: white; cursor: pointer; box-shadow: 0 6px 0 #388E3C; -webkit-tap-highlight-color: transparent;">
+      🔊 お話をきく
+    </button>
+    ↑<br>
+    下の文章を読み上げます
+  </div>
+  <div id="pony-speech" style="font-size: 16px; color: #333333; text-align: left; background: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 20px;">
+    <p data-path-to-node="0">安佐動物公園（あさどうぶつこうえん）でも、かわいらしい動きでみんなをメロメロにしている「レッサーパンダ」のひみつをしょうかいするよ！</p>
+    <hr data-path-to-node="1">
+    「こんにちは！ モフモフの毛並みが自慢のレッサーパンダだよ！
+    <p data-path-to-node="14">みんな、大人気の白と黒の『ジャイアントパンダ』は知っているよね？ でもね、世界で最初に見つかって『パンダ』って名前がついたのは、実はぼくたちのほうなんだ！ あとから大きなパンダが見つかったから、ぼくたちは『小さい』という意味の『レッサー』がついちゃったんだよ。</p>
+    <p data-path-to-node="15">ぼくたちが後ろ足でトコトコって上手に立ち上がる姿、見たことあるかな？
+これはね、人間と同じように『足のうら全体』を地面にピタッとつけて歩く仕組みになっているから、上手に立てるんだ。野生の仲間は、背伸びをしてまわりを見張ったり、『ボクは強いぞー！』って自分を大きく見せて敵をびっくりさせるときに立ち上がるんだよ。</p>
+    <p data-path-to-node="16">それから、この自慢の長〜いしっぽ！ 高い木の上を歩くときにバランスをとるだけじゃなくて、寒いときには『ぐるん』って体に巻きつけて、あったかい毛布にして眠るんだ。</p>
+    <p data-path-to-node="17">ぼくたちは、前足に『第６の指』っていう特別な突起があって、竹の茎をぎゅっと握って葉っぱを食べることができるんだ。手を使って器用に食べるところ、ぜひじっくり見ていってね！」</p>
+    <br>
+
+  </div>
+</div>
+<BR>
+<div style="text-align: center; padding: 10px 0 40px;">
+  <a href="ONSEIGAIDO.html" style="color: #888; text-decoration: none; font-size: 14px;">← 音声ガイド（動物一覧）にもどる</a>
+</div>
+
+<script>
+function playText(id) {
+  var btn = document.getElementById('main-btn');
+  
+  // スマホの音声機能を完全に初期化・クリアする（詰まり解消）
+  if (window.speechSynthesis) {
+    // 1. もし現在喋っている最中なら、止めて緑ボタンに戻す
+    if (window.speechSynthesis.speaking) {
+      window.speechSynthesis.cancel();
+      resetButton(btn);
+      return;
+    }
+    // 過去の変なエラー残骸を念のため一度クリア
+    window.speechSynthesis.cancel();
+  }
+  
+  var target = document.getElementById(id);
+  if (target) {
+    var text = target.textContent || target.innerText;
+    // スピーカーや停止の絵文字をカット
+    var cleanedText = text.replace(/🔊|🛑/g, ''); 
+    
+    // 音声オブジェクトの作成
+    var uttr = new SpeechSynthesisUtterance(cleanedText);
+    uttr.lang = "ja-JP";
+    uttr.rate = 1.0;
+    uttr.pitch = 1.0;
+    
+    // 【最重要】スマホが「タップされた！」と認識した直後に即座に文字を変えて喋らせる
+    btn.innerHTML = '🛑 お話を止める';
+    btn.style.backgroundColor = '#d32f2f';
+    btn.style.boxShadow = '0 6px 0 #9a0007';
+    
+    // 喋り終わったとき・エラーが起きたときは緑に戻す
+    uttr.onend = function() { resetButton(btn); };
+    uttr.onerror = function() { resetButton(btn); };
+    
+    // 発声
+    if (window.speechSynthesis) {
+      window.speechSynthesis.speak(uttr);
+    }
+  }
+}
+
+function resetButton(btn) {
+  if (btn) {
+    btn.innerHTML = '🔊 お話をきく';
+    btn.style.backgroundColor = '#4CAF50';
+    btn.style.boxShadow = '0 6px 0 #388E3C';
+  }
+}
+</script>
+</body>
+</html>

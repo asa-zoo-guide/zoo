@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="GENERATOR" content="JustSystems Homepage Builder Version 22.0.5.0 for Windows">
+<meta name="justsystems:DeviceType" content="SmartPhoneV">
+<title>フラミンゴーの解説 - 安佐動物公園ガイド</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #f9f9f9; text-align: center; line-height: 1.8;">
+
+<div style="padding: 20px;">
+  <h1 style="font-size: 24px; color: #2d5a27; margin: 10px 0 20px;">ベニイロフラミンゴ</h1>
+  <img src="flamingo.png" width="300" border="0" height="225"><br>
+  <div style="padding: 0 5px; margin-bottom: 25px;">
+    <button type="button" id="main-btn" onclick="playText('pony-speech')" 
+            style="display: block; width: 100%; height: 50px; font-size: 24px; font-weight: bold; border: none; border-radius: 16px; background-color: #4CAF50; color: white; cursor: pointer; box-shadow: 0 6px 0 #388E3C; -webkit-tap-highlight-color: transparent;">
+      🔊 お話をきく
+    </button>
+    ↑<br>
+    下の文章を読み上げます
+  </div>
+  <div id="pony-speech" style="font-size: 16px; color: #333333; text-align: left; background: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 20px;">
+安佐動物公園でも大人気の、とってもきれいな「ベニイロフラミンゴ」のひみつをしょうかいするよ！<br><br>
+    <p data-path-to-node="5">「やあ！ みんな、こんにちは！ ぼくはベニイロフラミンゴ。フラミンゴの仲間の中で、いちばん体が大きくて、いちばん鮮やかな『紅色』をしているんだ。</p>
+    <p data-path-to-node="6">ねえねえ、ぼくたちの羽を見て。とってもきれいな赤色でしょう？ でもね、生まれたばかりの赤ちゃんは、実はまぶしい赤じゃなくて、地味な『灰色』をしているんだよ。じゃあ、なんでこんなに赤くなると思う？</p>
+    <p data-path-to-node="7">ヒントはね……毎日食べている『ごはん』なんだ！ ぼくたちは、エビの仲間や藻が大好物。それをたくさん食べるうちに、食べ物に入っている赤色のパワーが体にたまっていって、だんだん夕日のようなきれいな赤色に変身していくんだよ。</p>
+    <p data-path-to-node="8">それから、ぼくたちがプールの中で『１本足』で立っているのを見つけたら、注目してみてね。水の中にずっといると足が冷えちゃうから、片方の足を羽の中に入れて、あっためているんだ。それに、ぼくたちにとっては、１本足で立つ方がつかれなくてラクちんなんだよ。</p>
+    <p data-path-to-node="9">お父さんとお母さんがお口から赤い『フラミンゴミルク』を出して、一生懸命子育てをする優しい姿も、ぜひ観察してみてね！」</p>
+    <br>
+
+  </div>
+</div>
+<BR>
+<div style="text-align: center; padding: 10px 0 40px;">
+  <a href="ONSEIGAIDO.html" style="color: #888; text-decoration: none; font-size: 14px;">← 音声ガイド（動物一覧）にもどる</a>
+</div>
+<script>
+function playText(id) {
+  var btn = document.getElementById('main-btn');
+  
+  // スマホの音声機能を完全に初期化・クリアする（詰まり解消）
+  if (window.speechSynthesis) {
+    // 1. もし現在喋っている最中なら、止めて緑ボタンに戻す
+    if (window.speechSynthesis.speaking) {
+      window.speechSynthesis.cancel();
+      resetButton(btn);
+      return;
+    }
+    // 過去の変なエラー残骸を念のため一度クリア
+    window.speechSynthesis.cancel();
+  }
+  
+  var target = document.getElementById(id);
+  if (target) {
+    var text = target.textContent || target.innerText;
+    // スピーカーや停止の絵文字をカット
+    var cleanedText = text.replace(/🔊|🛑/g, ''); 
+    
+    // 音声オブジェクトの作成
+    var uttr = new SpeechSynthesisUtterance(cleanedText);
+    uttr.lang = "ja-JP";
+    uttr.rate = 1.0;
+    uttr.pitch = 1.0;
+    
+    // 【最重要】スマホが「タップされた！」と認識した直後に即座に文字を変えて喋らせる
+    btn.innerHTML = '🛑 お話を止める';
+    btn.style.backgroundColor = '#d32f2f';
+    btn.style.boxShadow = '0 6px 0 #9a0007';
+    
+    // 喋り終わったとき・エラーが起きたときは緑に戻す
+    uttr.onend = function() { resetButton(btn); };
+    uttr.onerror = function() { resetButton(btn); };
+    
+    // 発声
+    if (window.speechSynthesis) {
+      window.speechSynthesis.speak(uttr);
+    }
+  }
+}
+
+function resetButton(btn) {
+  if (btn) {
+    btn.innerHTML = '🔊 お話をきく';
+    btn.style.backgroundColor = '#4CAF50';
+    btn.style.boxShadow = '0 6px 0 #388E3C';
+  }
+}
+</script></body>
+</html>
