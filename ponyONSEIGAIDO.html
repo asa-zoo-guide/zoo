@@ -35,41 +35,45 @@
 
 <script>
 function playText(id) {
-  if (window.speechSynthesis) {
-    var btn = document.getElementById('main-btn');
+  if (!window.speechSynthesis) {
+    alert("お使いのブラウザは音声読み上げに対応していません。");
+    return;
+  }
+
+  var btn = document.getElementById('main-btn');
+  
+  // 1. もし現在再生中なら、即座に止めてボタンを元に戻して終了
+  if (window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+    resetButton(btn);
+    return;
+  }
+  
+  var target = document.getElementById(id);
+  if (target) {
+    var text = target.textContent || target.innerText;
+    var cleanedText = text.replace(/🔊|🛑/g, ''); 
     
-    // もし今スマホが喋っている最中なら、声を止めてボタンを元に戻す
-    if (window.speechSynthesis.speaking) {
-      window.speechSynthesis.cancel();
+    var uttr = new SpeechSynthesisUtterance(cleanedText);
+    uttr.lang = "ja-JP";
+    uttr.rate = 1.0;
+    uttr.pitch = 1.0;
+    
+    // 2. 【重要】スマホのブロックを回避するため、speakを呼ぶ前にボタン表示を即時変える
+    btn.innerHTML = '🛑 お話を止める';
+    btn.style.backgroundColor = '#d32f2f';
+    btn.style.boxShadow = '0 6px 0 #9a0007';
+    
+    // 3. 喋り終わったときの処理だけを仕込んでおく
+    uttr.onend = function() {
       resetButton(btn);
-      return;
-    }
+    };
+    uttr.onerror = function() {
+      resetButton(btn);
+    };
     
-    var target = document.getElementById(id);
-    if (target) {
-      var text = target.textContent || target.innerText;
-      
-      // スマホが間違えて「スピーカー」と喋るのを防ぐ処理
-      var cleanedText = text.replace(/🔊|🛑/g, ''); 
-      var uttr = new SpeechSynthesisUtterance(cleanedText);
-      uttr.lang = "ja-JP";
-      uttr.rate = 1.0;
-      uttr.pitch = 1.0;
-      
-      // 再生が始まったら、ボタンを「赤色のお話を止める」に変える
-      uttr.onstart = function() {
-        btn.innerHTML = '🛑 お話を止める';
-        btn.style.backgroundColor = '#d32f2f';
-        btn.style.boxShadow = '0 6px 0 #9a0007';
-      };
-      
-      // 最後まで喋り終わったら、自動で「緑色のお話をきく」に戻す
-      uttr.onend = function() {
-        resetButton(btn);
-      };
-      
-      window.speechSynthesis.speak(uttr);
-    }
+    // 4. 発声を開始
+    window.speechSynthesis.speak(uttr);
   }
 }
 
@@ -82,6 +86,5 @@ function resetButton(btn) {
   }
 }
 </script>
-
 </body>
 </html>
