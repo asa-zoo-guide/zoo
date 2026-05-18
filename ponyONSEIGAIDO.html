@@ -35,15 +35,10 @@
 
 <script>
 function playText(id) {
-  if (!window.speechSynthesis) {
-    alert("お使いのブラウザは音声読み上げに対応していません。");
-    return;
-  }
-
   var btn = document.getElementById('main-btn');
   
   // 1. もし現在再生中なら、即座に止めてボタンを元に戻して終了
-  if (window.speechSynthesis.speaking) {
+  if (window.speechSynthesis && window.speechSynthesis.speaking) {
     window.speechSynthesis.cancel();
     resetButton(btn);
     return;
@@ -59,12 +54,12 @@ function playText(id) {
     uttr.rate = 1.0;
     uttr.pitch = 1.0;
     
-    // 2. 【重要】スマホのブロックを回避するため、speakを呼ぶ前にボタン表示を即時変える
+    // 2. スマホのブロックを回避するため、ボタン表示を即時変える
     btn.innerHTML = '🛑 お話を止める';
     btn.style.backgroundColor = '#d32f2f';
     btn.style.boxShadow = '0 6px 0 #9a0007';
     
-    // 3. 喋り終わったときの処理だけを仕込んでおく
+    // 3. 喋り終わったときの処理を仕込む
     uttr.onend = function() {
       resetButton(btn);
     };
@@ -72,8 +67,10 @@ function playText(id) {
       resetButton(btn);
     };
     
-    // 4. 発声を開始
-    window.speechSynthesis.speak(uttr);
+    // 4. 発声を開始（機能が存在する場合のみ実行）
+    if (window.speechSynthesis) {
+      window.speechSynthesis.speak(uttr);
+    }
   }
 }
 
@@ -85,6 +82,5 @@ function resetButton(btn) {
     btn.style.boxShadow = '0 6px 0 #388E3C';
   }
 }
-</script>
-</body>
+</script></body>
 </html>
