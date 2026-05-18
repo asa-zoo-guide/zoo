@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="GENERATOR" content="JustSystems Homepage Builder Version 22.0.5.0 for Windows">
+<meta name="justsystems:DeviceType" content="SmartPhoneV">
+<title>asazoo fan</title>
+
+<style>
+<!--
+
+body{
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  text-align: center;
+  line-height: 1.8;
+  background: #ffffff;
+}
+
+.container{
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 20px;
+}
+
+h1{
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+p{
+  color: #444;
+  margin-bottom: 30px;
+}
+
+button{
+  font-size: 16px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background-color: #4CAF50;
+  color: white;
+  width: 100%;
+  max-width: 300px;
+  display: block;
+  margin: 0 auto 40px;
+}
+
+.links a{
+  display: block;
+  padding: 14px;
+  margin: 10px 0;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  color: #333;
+  background: #fafafa;
+}
+
+.links a:hover{
+  background: #f0f0f0;
+}
+-->
+</style>
+</head>
+
+<body>
+<div class="container" style="text-align : center;">
+  動物園を作ろう
+  <p id="text" style="text-align : left;"><span style="font-size : 80%;">おめでとうございます！<br>
+あなたは、安佐動物公園の新しい園長に選ばれました。<br>
+  経営者からは、「飼育する動物は以下の四種類。飼育する動物のエサは自給すること。君に与えられたミッションは、エサの自給のために必要な、園内外の農地や森林を確保することだ」と指示されました。<br>
+  まずは、マルミミゾウからです。さっそく、ゾウの展示エリアに行きましょう！<br>
+  </span></p>
+  <div class="links">
+  <a href="zoomanage10.html">マルミミゾウ</a>
+  <a href="#">チーター</a>
+  <a href="#">オオサンショウウオ</a>
+  <a href="#">シフゾウ</a>
+</div>
+  <br>
+  <br>
+  <div class="links">
+  <a href="index.html">トップページに戻る</a>
+</div>
+
+  <div class="container" style="text-align : left;"></div>
+  <script>
+function readText() {
+  const text = document.getElementById("text").innerText;
+  const uttr = new SpeechSynthesisUtterance(text);
+  uttr.lang = "ja-JP";
+  speechSynthesis.speak(uttr);
+}
+</script>
+
+</div>
+</body>
+</html>
