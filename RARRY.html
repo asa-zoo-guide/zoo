@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="GENERATOR" content="JustSystems Homepage Builder Version 22.0.5.0 for Windows">
+<meta name="justsystems:DeviceType" content="SmartPhoneV">
+<title>asazoo fan</title>
+
+<style>
+<!--
+
+body{
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  text-align: center;
+  line-height: 1.8;
+  background: #ffffff;
+}
+
+.container{
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 20px;
+}
+
+h1{
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+p{
+  color: #444;
+  margin-bottom: 30px;
+}
+
+button{
+  font-size: 16px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background-color: #4CAF50;
+  color: white;
+  width: 100%;
+  max-width: 300px;
+  display: block;
+  margin: 0 auto 40px;
+}
+
+.links a{
+  display: block;
+  padding: 14px;
+  margin: 10px 0;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  color: #333;
+  background: #fafafa;
+}
+
+.links a:hover{
+  background: #f0f0f0;
+}
+-->
+</style>
+</head>
+
+<body>
+<div class="container" style="text-align : center;">
+<h1>歩行ラリー</h1>
+  <p id="text" style="text-align : left;">　<span style="font-size : 80%;">個人やグループでコマ図（指示図）をたどりながらコースを歩き、チェックポイントでのクイズを解きつつ<i>（クイズは工事中）</i>、ゴールを目指す野外レクリエーションゲームです。<br>
+  　希望するコースを押すと、コマ図が表示されます。</span>
+  </p>
+  <div class="links">
+<a href="komazu_ikiiki.pdf" target="_blank" rel="noopener noreferrer" style="display: inline-block; padding: 10px 20px; background-color: #2980b9; color: white; text-decoration: none; border-radius: 5px;">
+いきいきスタンプラリー　コース</a>
+  <a href="#">絶滅危惧種　コース</a>
+  <a href="#">環境　コース</a>
+  <a href="#">コンプリート　コース</a>
+</div>
+  <span style="color : #ff0000;
+	font-size : 80%;
+">いきいきスタンプラリーコース以外は工事中</span><br>
+  <p style="text-align : left;">いきいきスタンプラリー　コース<br>
+  　<span style="font-size : 80%;">広島市が実施している高齢者いきいき活動ポイント事業のポイント付与対象活動になるスタンプラリーの最短コース。ポイントをもらうにはスタンプ用紙とポイント手帳が必要です。</span><br>
+  <br>
+  絶滅危惧種コース<br>
+  　<span style="font-size : 80%;">絶滅の危機レベルが高く、安佐動物公園がその保護や繁殖に深く関わっている代表的な生き物を回るコース（マルミミゾウマルミミゾウ、オオサンショウオ、クロサイ、ナゴヤダルマガエル、ニホンリス）</span><br>
+  <br>
+  環境コース<br>
+  　<span style="font-size : 80%;">気候変動や開発と関連が深い生き物を回るコース。マレーバク（パーム油と熱帯雨林破壊）、チンパンジー（スマホとレアメタル）、フンボルトペンギン（ゴーストギア、海洋プラスチックごみ）、ツキノワグマ（被害と保護のトレードオフ）。</span><br>
+  <br>
+  コンプリートコース<br>
+  　<span style="font-size : 80%;">園内の全ての生き物（約150種類）を見て回るコース。</span><br>
+  </p>
+  <div class="links">
+  <a href="index.html">トップページに戻る</a>
+</div>
+
+  <div class="container" style="text-align : left;"></div>
+  <script>
+function readText() {
+  const text = document.getElementById("text").innerText;
+  const uttr = new SpeechSynthesisUtterance(text);
+  uttr.lang = "ja-JP";
+  speechSynthesis.speak(uttr);
+}
+</script>
+
+</div>
+</body>
+</html>
