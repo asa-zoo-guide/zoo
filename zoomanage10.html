@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="GENERATOR" content="JustSystems Homepage Builder Version 22.0.5.0 for Windows">
+<meta name="justsystems:DeviceType" content="SmartPhoneV">
+<title>動物園を作ろう</title>
+    <style>
+<!--
+        :root { --main-color: #4a6741; --correct-color: #2e7d32; --wrong-color: #c62828; }
+        body{
+	font-family: sans-serif; background: #f0f2f0; margin: 0; padding: 20px;
+}
+        .card{
+	background: white; padding: 25px; border-radius: 20px; box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+        h1{
+	font-size: 1.2rem; color: var(--main-color); text-align: center;
+}
+        .instruction{
+	background: #f9f9f9; padding: 15px; border-radius: 10px; margin-bottom: 20px; font-size: 0.9rem; line-height: 1.5; border: 1px solid #ddd;
+}
+        .choice-btn{
+	width: 100%; padding: 18px; margin-bottom: 12px; background: white; border: 2px solid #ddd; border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer;
+}
+        
+        /* 判定表示エリア */
+        #result-area{
+	display: none; text-align: center; padding: 20px; border-radius: 15px; margin-top: 10px; animation: pop 0.3s ease-out;
+}
+        @keyframes pop { 0% { transform: scale(0.8); } 100% { transform: scale(1); } }
+        
+        .judge-mark{
+	font-size: 3rem; font-weight: bold; margin-bottom: 10px;
+}
+        .coach-msg{
+	text-align: left; font-size: 0.9rem; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 10px; margin-top: 10px; line-height: 1.5;
+}
+        .retry-btn{
+	margin-top: 15px; padding: 10px 20px; background: #666; color: white; border: none; border-radius: 5px;
+}
+    -->
+</style>
+</head>
+<body>
+
+<div id="game-screen" class="card">
+    <h1>🐘 ゾウ舎ミッション</h1>
+    <div class="instruction">
+        <strong>【現場リサーチ】</strong><br>
+  マルミミゾウの餌（草木）を確保するために、森林を用意しなければなりません。<br>
+  ここの看板に書かれている1日の食事量をヒントにして考えてみよう。野生のゾウが毎日食べて生きるためには、どれくらいの広さの森が必要かな？ <br>
+  </div>
+
+    <button class="choice-btn" onclick="judge(1)">A. 安佐動物公園スタジアム 160個分</button>
+    <button class="choice-btn" onclick="judge(2)">B. スタジアム 1,600個分</button>
+    <button class="choice-btn" onclick="judge(3)">C. スタジアム 16,000個分</button>
+
+    <div id="result-area">
+        <div id="mark" class="judge-mark"></div>
+        <div id="comment"></div>
+        <button id="retry" class="retry-btn" onclick="reset()">もう一度解く</button>
+    </div>
+
+  <br>
+  <br>
+  <div class="links">
+  <a href="manager.html">育てる動物を選ぶページに戻る</a>
+  <br>
+  <br>
+  <br>
+  <a href="index.html">トッ</a>プページに戻る </div>
+
+  <br>
+  <br>
+</div>
+
+<script>
+function judge(choice) {
+    const area = document.getElementById('result-area');
+    const mark = document.getElementById('mark');
+    const comment = document.getElementById('comment');
+    const btns = document.querySelectorAll('.choice-btn');
+
+    // ボタンを一旦隠す
+    btns.forEach(b => b.style.display = 'none');
+    area.style.display = 'block';
+
+    if (choice === 3) {
+        area.style.background = "#e8f5e9";
+        area.style.color = "#2e7d32";
+        mark.innerText = "⭕ 正解！";
+        comment.innerHTML = `
+            <strong>16,000個分！</strong><br>
+以下の解説は音声でも聞けます　ぜひ、次の動物の獣舎へ移動しながらきいてください。通信料がかかります。<br>
+<a href="https://stand.fm/episodes/69f8bf3d63d1f65806b94fdf">音声解説を聞くにはここをクリックしてください（２分２５秒）</a><br>
+
+<br>
+
+マルミミゾウ一頭の一日の食事である約150kgもの植物を日本国内で入手するとしたら、どれだけの面積の森林が必要だろうか。
+象が年間55トンの植物を食べるとすると、マツダスタジアム約110個分、安佐動物公園約2.2面分になります。
+安佐動物公園の全体の敷地が約50haなので、園内すべての山をエサ場にしても、ゾウ半頭も養えない計算になります。象の餌になる植物を園内で自給するのは難しそうです。<br>
+おまけに、この計算は人が森林を育てた場合です。自然界ではそうはいきません。
+<br>
+
+野生のマルミミゾウ1頭が、森の生態系を壊さずに（持続可能に）生きていくために必要な森林面積は、約160平方キロメートルと言われています。
+この値で計算すると広島市全体で飼えるマルミミゾウはたった6頭。野生であればね。なぜそんなに広い面積が必要なのか？
+これには、マルミミゾウが「森の建築家」と呼ばれる理由が隠されています。<br>
+<br>
+
+「大食漢」<br>
+
+　1日に約150kgもの植物を食べます。狭い範囲でこれだけ食べ続けると、植物の再生が追いつかず、森が枯れてしまいます。<br>
+<br>
+
+「移動」が仕事<br>
+
+　ゾウは食べ歩きながらフンをし、種を遠くへ運び、道を切り拓きます。この「循環」を成立させるためには、森が回復するのを待つための広大な「移動スペース」が不可欠なのです。
+そうやってゾウは森を維持しているんだ。マルミミゾウ一頭を守ることは、マツダスタジアム16000個分の大きさのアフリカの森林を守ることになるんだね。<br>
+<br>
+
+では<br>
+
+            <div class="coach-msg">
+                「ゾウはこれだけ広い森を歩いて守っている。ヒトである君の生活を支える『森』は、どこにどれくらいあるだろうか？
+　それはいつまであるんだろうか。」
+            </div>
+        `;
+        document.getElementById('retry').style.display = 'none';
+    } else {
+        area.style.background = "#ffebee";
+        area.style.color = "#c62828";
+        mark.innerText = "❌ ザンネン！";
+        comment.innerHTML = "ゾウの食欲を甘く見てはいけない。もっと、もっと広いんだ！";
+        document.getElementById('retry').style.display = 'inline-block';
+    }
+}
+
+function reset() {
+    document.getElementById('result-area').style.display = 'none';
+    const btns = document.querySelectorAll('.choice-btn');
+    btns.forEach(b => b.style.display = 'block');
+}
+</script>
+
+</body>
+</html>
