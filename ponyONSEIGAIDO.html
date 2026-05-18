@@ -10,7 +10,7 @@
 <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #f9f9f9; text-align: center; line-height: 1.8;">
 
 <div style="padding: 20px;">
-  <h1 style="font-size: 24px; color: #2d5a27; margin: 10px 0 20px;">ポニー　ｖ１</h1>
+  <h1 style="font-size: 24px; color: #2d5a27; margin: 10px 0 20px;">ポニー　ｖ２</h1>
 
   <img src="animal_pony.png" width="300" border="0" style="margin-bottom: 20px; max-width: 100%; height: auto;" height="300"><br>
   <div style="padding: 0 5px; margin-bottom: 25px;">
@@ -37,44 +37,46 @@
 function playText(id) {
   var btn = document.getElementById('main-btn');
   
-  // 1. もし現在再生中なら、即座に止めてボタンを元に戻して終了
-  if (window.speechSynthesis && window.speechSynthesis.speaking) {
+  // スマホの音声機能を完全に初期化・クリアする（詰まり解消）
+  if (window.speechSynthesis) {
+    // 1. もし現在喋っている最中なら、止めて緑ボタンに戻す
+    if (window.speechSynthesis.speaking) {
+      window.speechSynthesis.cancel();
+      resetButton(btn);
+      return;
+    }
+    // 過去の変なエラー残骸を念のため一度クリア
     window.speechSynthesis.cancel();
-    resetButton(btn);
-    return;
   }
   
   var target = document.getElementById(id);
   if (target) {
     var text = target.textContent || target.innerText;
+    // スピーカーや停止の絵文字をカット
     var cleanedText = text.replace(/🔊|🛑/g, ''); 
     
+    // 音声オブジェクトの作成
     var uttr = new SpeechSynthesisUtterance(cleanedText);
     uttr.lang = "ja-JP";
     uttr.rate = 1.0;
     uttr.pitch = 1.0;
     
-    // 2. スマホのブロックを回避するため、ボタン表示を即時変える
+    // 【最重要】スマホが「タップされた！」と認識した直後に即座に文字を変えて喋らせる
     btn.innerHTML = '🛑 お話を止める';
     btn.style.backgroundColor = '#d32f2f';
     btn.style.boxShadow = '0 6px 0 #9a0007';
     
-    // 3. 喋り終わったときの処理を仕込む
-    uttr.onend = function() {
-      resetButton(btn);
-    };
-    uttr.onerror = function() {
-      resetButton(btn);
-    };
+    // 喋り終わったとき・エラーが起きたときは緑に戻す
+    uttr.onend = function() { resetButton(btn); };
+    uttr.onerror = function() { resetButton(btn); };
     
-    // 4. 発声を開始（機能が存在する場合のみ実行）
+    // 発声
     if (window.speechSynthesis) {
       window.speechSynthesis.speak(uttr);
     }
   }
 }
 
-// ボタンを最初の緑色に戻す処理
 function resetButton(btn) {
   if (btn) {
     btn.innerHTML = '🔊 お話をきく';
